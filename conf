@@ -1,9 +1,10 @@
 #!/bin/bash -ex
 # Insta-Snorby (Snorby Appliance) - TKLPatch 
 # By Jason Meller (Terracatta) & Dustin Webber (Mephux) | Team Snorby & Lookycode
-# Last Updated - 12/02/2010
 
 #Declare all methods
+
+
 install()
 {
     apt-get update
@@ -21,6 +22,7 @@ cleanup_apt()
     }
 
 
+export http_proxy=http://3.122.220.90:80
 #Set Hostname
 HOSTNAME="Insta-Snorby"
 echo "$HOSTNAME" > /etc/hostname
@@ -32,6 +34,7 @@ install gcc g++ build-essential libssl-dev libreadline5-dev zlib1g-dev linux-hea
 
 
 # Install ruby 1.9.2
+cd
 wget http://ftp.ruby-lang.org//pub/ruby/1.9/ruby-1.9.2-p0.tar.gz
 tar -xvzf ruby-1.9.2-p0.tar.gz
 cd ruby-1.9.2-p0
@@ -49,6 +52,7 @@ gem install rails --version=3.0.2
 # Get the random binary that works to make PDFs
 wget http://dl.dropbox.com/u/38088/wkhtmltopdf
 cp wkhtmltopdf /usr/local/bin/wkhtmltopdf
+chmod 755 /usr/local/bin/wkhtmltopdf
 
 # Download Snorby
 mkdir -p /var/www/snorby
@@ -62,7 +66,10 @@ cp /root/database.yml /var/www/snorby/config/database.yml
 cd /var/www/snorby
 
 # Setup Snorby
-bundle install
+http_proxy=http://3.122.220.90:80 bundle install
+
+# Setup mail
+install sendmail
 
 #Install packages for Snort
 install nmap nbtscan libpcap0.8-dev libpcre3-dev bison flex libpcap-ruby libdumbnet-dev apache2-mpm-prefork apache2-prefork-dev libapr1-dev libaprutil1-dev aspell libaspell-dev libapache2-mod-xsendfile jsvc openjdk-6-jre-headless apg
@@ -75,7 +82,7 @@ cd daq-0.3
 ./configure
 make && make install
 
-
+ 
 #Install Libdnet that actually works
 cd
 wget http://prdownloads.sourceforge.net/libdnet/libdnet-1.11.tar.gz?download
@@ -150,6 +157,24 @@ a2enmod ssl
 rm -rf /etc/apache2/sites-enabled/*
 a2ensite snorby
 a2ensite snorby-ssl
+
+#install stuff needed for OpenFPC
+install apache2 daemonlogger tcpdump tshark libarchive-zip-perl \
+libfilesys-df-perl libapache2-mod-php5 mysql-server php5-mysql \
+libdatetime-perl libdbi-perl libdate-simple-perl php5-mysql \
+libterm-readkey-perl libdate-simple-perl
+
+#Install OpenFPC save final steps for bootup if user wishes
+cd
+wget http://openfpc.googlecode.com/files/openfpc-0.4-267.tgz
+tar zxvf openfpc-0.4-267.tgz
+mkdir /etc/openfpc
+
+#Stop services and cleanup
+cleanup_apt
+ 
+
+
 #Kill uneeded inithooks
 rm /usr/lib/inithooks/firstboot.d/80tklbam
 

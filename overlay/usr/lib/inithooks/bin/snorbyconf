@@ -2,3 +2,5 @@
 # setup snorby
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 cd /var/www/snorby && /usr/local/bin/rake -f /var/www/snorby/Rakefile snorby:setup RAILS_ENV=production
+cd /var/www/snorby && /usr/local/bin/ruby script/delayed_job start
+cd /var/www/snorby && /usr/local/bin/rails runner 'Snorby::Jobs::SensorCacheJob.new(false).perform; Snorby::Jobs::DailyCacheJob.new(false).perform'

@@ -1,19 +1,12 @@
-Welcome to Insta-Snorby the official snobby appliance!
+Welcome to Insta-Snorby the official Snorby appliance!
 
 You may access this Insta-Snorby appliance over the
 network using the following methods:
 
-SSH/SFTP   :   root@$ipaddr (port 22)
-Snorby     :   http://insta-snorby.localdomain/
-Snorby (IP):   http://$ipaddr
-
-NOTE: add "$ipaddr  insta-snorby.localdomain" to your
-hosts file:
-   Windows: c:\windows\system32\drivers\etc\hosts
-   Linux:  /etc/hosts
+        SSH/SFTP : root@$ipaddr (port 22)
+     Snorby (IP) : http://$ipaddr
+    Default User : snorby@snorby.org
+Default Password : snorby
 
 For more information visit the Snorby Website
              http://www.snorby.org
-
-Thanks to Turn-Key Linux for their awesome project!
-	     http://www.turnkeylinux.org
