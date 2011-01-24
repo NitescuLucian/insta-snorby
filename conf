@@ -22,7 +22,6 @@ cleanup_apt()
     }
 
 
-export http_proxy=http://3.122.220.90:80
 #Set Hostname
 HOSTNAME="Insta-Snorby"
 echo "$HOSTNAME" > /etc/hostname
@@ -49,7 +48,7 @@ gem install rack-mount --version=0.4.0
 gem install rails --version=3.0.2
 
 
-# Get the random binary that works to make PDFs
+# Get the  binary that works to make PDFs
 wget http://dl.dropbox.com/u/38088/wkhtmltopdf
 cp wkhtmltopdf /usr/local/bin/wkhtmltopdf
 chmod 755 /usr/local/bin/wkhtmltopdf
@@ -60,13 +59,12 @@ mkdir -p /var/www/snorby
 adduser --system --home /var/www/snorby/ --no-create-home --group --shell /bin/bash snorby
 usermod -a -G snorby www-data
 
-git clone http://github.com/Snorby/snorby.git /var/www/snorby
+git clone http://github.com/Snorby/snorby.git  /var/www/snorby
 cp /root/database.yml /var/www/snorby/config/database.yml
-
 cd /var/www/snorby
 
 # Setup Snorby
-http_proxy=http://3.122.220.90:80 bundle install
+bundle install
 
 # Setup mail
 install sendmail
@@ -76,9 +74,9 @@ install nmap nbtscan libpcap0.8-dev libpcre3-dev bison flex libpcap-ruby libdumb
 
 #Install DAQ
 cd
-wget http://www.snort.org/dl/snort-current/daq-0.3.tar.gz
-tar zxvf daq-0.3.tar.gz
-cd daq-0.3
+wget http://www.snort.org/dl/snort-current/daq-0.5.tar.gz
+tar zxvf daq-0.5.tar.gz
+cd daq-0.5
 ./configure
 make && make install
 
@@ -95,9 +93,9 @@ ldconfig
 
 #Install Snort
 cd
-wget http://www.snort.org/dl/snort-current/snort-2.9.0.2.tar.gz
-tar zxvf snort-2.9.0.2.tar.gz
-cd snort-2.9.0.2
+wget http://www.snort.org/dl/snort-current/snort-2.9.0.3.tar.gz
+tar zxvf snort-2.9.0.3.tar.gz
+cd snort-2.9.0.3
 ./configure --with-mysql --enable-gre --enable-reload --enable-linux-smp-stats --enable-zlib
 make && make install
 mkdir /var/log/snort 
@@ -109,11 +107,11 @@ chown snort:snort /var/log/snort
 mkdir /etc/snort
 cp etc/* /etc/snort/
 
-#Install Barnyard
+#Install Barnyard2
 cd
-wget http://www.securixlive.com/download/barnyard2/barnyard2-1.8.tar.gz
-tar zxvf barnyard2-1.8.tar.gz
-cd barnyard2-1.8
+wget http://www.securixlive.com/download/barnyard2/barnyard2-1.9.tar.gz
+tar zxvf barnyard2-1.9.tar.gz
+cd barnyard2-1.9
 ./configure --with-mysql
 make && make install
 cp etc/barnyard2.conf /etc/snort/
@@ -121,6 +119,13 @@ mkdir /var/log/barnyard2
 chmod 666 /var/log/barnyard2
 touch  /var/log/snort/barnyard2.waldo
 chown snort:snort /var/log/snort/barnyard2.waldo
+
+#Install Pulled Pork
+install libwww-Perl libcrypt-ssleay-perl
+cd
+wget http://pulledpork.googlecode.com/files/pulledpork-0.5.0.tar.gz
+tar zxvf pulledpork-0.5.0.tar.gz
+
 
 #Download and install latest Emerging Threat Rules
 cd
@@ -132,6 +137,7 @@ cp /root/rules/* /etc/snort/rules/
 cp  /root/rules/sid-msg.map /etc/snort/sid-msg.map
 rm -rf /root/rules
 cp /root/snort.conf /etc/snort/snort.conf
+cp  /root/etpulledpork.conf /root/pulledpork-0.5.0/etc/pulledpork.conf
 
 
 #Copy over configs
@@ -153,10 +159,12 @@ a2enmod passenger
 a2enmod rewrite
 a2enmod ssl
 
-#delete default site
+#delete default site and add Snorby
 rm -rf /etc/apache2/sites-enabled/*
 a2ensite snorby
 a2ensite snorby-ssl
+touch /var/www/snorby/log/production.log
+chmod 666 /var/www/snorby/log/production.log
 
 #install stuff needed for OpenFPC
 install apache2 daemonlogger tcpdump tshark libarchive-zip-perl \
@@ -169,12 +177,7 @@ cd
 wget http://openfpc.googlecode.com/files/openfpc-0.4-267.tgz
 tar zxvf openfpc-0.4-267.tgz
 mkdir /etc/openfpc
-
-#Stop services and cleanup
-cleanup_apt
  
-
-
 #Kill uneeded inithooks
 rm /usr/lib/inithooks/firstboot.d/80tklbam
 

@@ -1,4 +1,5 @@
 Welcome to Insta-Snorby the official Snorby appliance!
+~Version 0.6
 
 You may access this Insta-Snorby appliance over the
 network using the following methods:
