@@ -1,5 +1,0 @@
-#!/bin/bash -e
-# setup snorby
-cd /var/www/snorby && /usr/local/bin/ruby script/delayed_job start 
-cd /var/www/snorby && /usr/local/bin/rails runner  'Snorby::Jobs::SensorCacheJob.new(false).perform; Snorby::Jobs::DailyCacheJob.new(false).perform'
-

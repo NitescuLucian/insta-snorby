@@ -1,6 +1,0 @@
-#!/bin/bash -e
-# setup snorby
-
-/usr/lib/inithooks//bin/snorbywork >> ~/log 2>&1
-
-

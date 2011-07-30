@@ -1,3 +1,0 @@
-#!/bin/bash -e
-# set Timezone
-dpkg-reconfigure tzdata
