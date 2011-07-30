@@ -41,11 +41,11 @@ def main():
 	if response:
 		d.infobox('Configuring Pulled Pork to run everyday at 2:00AM local time')
 		system("crontab -l > /root/crontmp")
-		system("echo '0 2 * * * /root/pulledpork-0.5.0/pulledpork.pl -c /root/pulledpork-0.5.0/etc/pulledpork.conf -H -v >> /var/log/pulledpork 2>&1 #Update Snort Rules' >> /root/crontmp")
+		system("echo '0 2 * * * /root/pulledpork-0.6.1/pulledpork.pl -c /root/pulledpork-0.5.0/etc/pulledpork.conf -H -v >> /var/log/pulledpork 2>&1 #Update Snort Rules' >> /root/crontmp")
 		system("crontab /root/crontmp")
 
 		d.infobox('Running Pulled Pork now! Logs are stored at /var/log/pulledpork')
-		system("/root/pulledpork-0.5.0/pulledpork.pl -c /root/pulledpork-0.5.0/etc/pulledpork.conf -H -v >> /var/log/pulledpork 2>&1")
+		system("/root/pulledpork-0.6.1/pulledpork.pl -c /root/pulledpork-0.5.0/etc/pulledpork.conf -H -v >> /var/log/pulledpork 2>&1")
 
 if __name__ == "__main__":
     main()

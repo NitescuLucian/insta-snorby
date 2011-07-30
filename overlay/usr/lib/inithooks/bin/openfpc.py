@@ -46,9 +46,9 @@ def main():
 
     if fpcuser and fpcpassword:
 	ipaddress = get_ip_address('eth0')
-	d.infobox('Installing OpenFPC 0.4-267')
+	d.infobox('Installing OpenFPC 0.6-314')
 	system('htpasswd -b -c /etc/openfpc/apache2.passwd %s %s > /dev/null' % (fpcuser[1], fpcpassword) )
-	system('cd /root/openfpc-0.4-267/ &&  /root/openfpc-0.4-267/openfpc-install.sh install > /dev/null')
+	system('cd /root/openfpc-0.6-314/ &&  /root/openfpc-0.6-314/openfpc-install.sh install > /dev/null')
 	system("sed -i 's/GUIUSER=openfpc/#GUIUSER=openfpc/g' /etc/openfpc/openfpc-default.conf")
 	system("sed -i 's/GUIPASS=openfpc/#GUIUSER=openfpc/g' /etc/openfpc/openfpc-default.conf")
 	system("sed -i 's/USER=openfpc=openfpc/USER=%s=%s/g' /etc/openfpc/openfpc-default.conf" % (fpcuser[1], fpcpassword))
@@ -56,7 +56,7 @@ def main():
 	system("sed -i 's/AuthName/#AuthName/g' /etc/apache2/sites-enabled/openfpc.apache2.site")
 	system("sed -i 's/AuthUserFile/#AuthUserFile/g' /etc/apache2/sites-enabled/openfpc.apache2.site")
 	system("sed -i 's/Require valid-user/#Require valid-user/g' /etc/apache2/sites-enabled/openfpc.apache2.site")
-	d.infobox('Starting OpenFPC 0.4-267')
+	d.infobox('Starting OpenFPC 0.6-314')
 	system("openfpc -action start > /dev/null")
 	d.infobox('Configuring Snorby...')
 	system("cd /var/www/snorby && /usr/local/bin/rails runner 'Setting.set(:packet_capture, 1)'")

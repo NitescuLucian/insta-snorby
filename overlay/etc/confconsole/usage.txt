@@ -1,5 +1,5 @@
 Welcome to Insta-Snorby the official Snorby appliance!
-~Version 0.6
+~Version 0.7 by Jason Meller (Snorby by Dustin Webber)
 
 You may access this Insta-Snorby appliance over the
 network using the following methods:

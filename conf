@@ -34,18 +34,19 @@ install gcc g++ build-essential libssl-dev libreadline5-dev zlib1g-dev linux-hea
 
 # Install ruby 1.9.2
 cd
-wget http://ftp.ruby-lang.org//pub/ruby/1.9/ruby-1.9.2-p0.tar.gz
-tar -xvzf ruby-1.9.2-p0.tar.gz
-cd ruby-1.9.2-p0
+wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.2-p290.tar.gz
+tar -xvzf ruby-1.9.2-p290.tar.gz
+cd ruby-1.9.2-p290
 ./configure
 make && make install
 
 #Install packages needed for gems
 install imagemagick git-core libmysqlclient-dev mysql-server libmagickwand-dev 
-
-gem install tzinfo builder memcache-client rack rack-test erubis mail text-format bundler thor i18n sqlite3-ruby
+gem update --system
+gem install tzinfo builder memcache-client rack rack-test erubis mail bundler thor i18n sqlite3-ruby
 gem install rack-mount --version=0.4.0
-gem install rails --version=3.0.2
+gem install rails --version=3.0.5
+gem install rake 
 
 
 # Get the  binary that works to make PDFs
@@ -93,9 +94,9 @@ ldconfig
 
 #Install Snort
 cd
-wget http://www.snort.org/dl/snort-current/snort-2.9.0.3.tar.gz
-tar zxvf snort-2.9.0.3.tar.gz
-cd snort-2.9.0.3
+wget http://www.snort.org/dl/snort-current/snort-2.9.0.5.tar.gz
+tar zxvf snort-2.9.0.5.tar.gz
+cd snort-2.9.0.5
 ./configure --with-mysql --enable-gre --enable-reload --enable-linux-smp-stats --enable-zlib
 make && make install
 mkdir /var/log/snort 
@@ -123,8 +124,8 @@ chown snort:snort /var/log/snort/barnyard2.waldo
 #Install Pulled Pork
 install libwww-Perl libcrypt-ssleay-perl
 cd
-wget http://pulledpork.googlecode.com/files/pulledpork-0.5.0.tar.gz
-tar zxvf pulledpork-0.5.0.tar.gz
+wget http://pulledpork.googlecode.com/files/pulledpork-0.6.1.tar.gz
+tar zxvf pulledpork-0.6.1.tar.gz
 
 
 #Download and install latest Emerging Threat Rules
@@ -137,7 +138,7 @@ cp /root/rules/* /etc/snort/rules/
 cp  /root/rules/sid-msg.map /etc/snort/sid-msg.map
 rm -rf /root/rules
 cp /root/snort.conf /etc/snort/snort.conf
-cp  /root/etpulledpork.conf /root/pulledpork-0.5.0/etc/pulledpork.conf
+cp  /root/etpulledpork.conf /root/pulledpork-0.6.1/etc/pulledpork.conf
 
 
 #Copy over configs
@@ -174,8 +175,8 @@ libterm-readkey-perl libdate-simple-perl
 
 #Install OpenFPC save final steps for bootup if user wishes
 cd
-wget http://openfpc.googlecode.com/files/openfpc-0.4-267.tgz
-tar zxvf openfpc-0.4-267.tgz
+wget http://openfpc.googlecode.com/files/openfpc-0.6-314.tgz
+tar zxvf openfpc-0.6-314.tgz
 mkdir /etc/openfpc
  
 #Kill uneeded inithooks
