@@ -1,0 +1,13 @@
+Welcome to Insta-Snorby the official Snorby appliance!
+~Version 0.7 by Jason Meller (Snorby by Dustin Webber)
+
+You may access this Insta-Snorby appliance over the
+network using the following methods:
+
+        SSH/SFTP : root@$ipaddr (port 22)
+     Snorby (IP) : http://$ipaddr
+    Default User : snorby@snorby.org
+Default Password : snorby
+
+For more information visit the Snorby Website
+             http://www.snorby.org
