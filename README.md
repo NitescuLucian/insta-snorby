@@ -14,9 +14,9 @@ Insta-Snorby is a modified Ubuntu 10.04 [Turnkey Linux Appliance](http://www.tur
 Insta-Snorby comes bundled (or is capable of downloading) the following security tools and applications:
 
 ###Snorby
-*Snorby dependencies and prerequisites (sendmail, imagemagick, wkhtmltopdf)
-*Snorby Web Application
-*Apache2 (with Phusion Passenger) and MySQL 5 
+* Snorby dependencies and prerequisites (sendmail, imagemagick, wkhtmltopdf)
+* Snorby Web Application
+* Apache2 (with Phusion Passenger) and MySQL 5 
 
 ###Snort
 * Snort IDS 2.9.x.x - [More Info](http://www.snort.org/)
