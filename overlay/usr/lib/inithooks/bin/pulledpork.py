@@ -47,6 +47,7 @@ def main():
 		d.infobox('Running Pulled Pork now! Logs are stored at /var/log/pulledpork')
 		system("/root/pulledpork-0.6.1/pulledpork.pl -c /root/pulledpork-0.6.1/etc/pulledpork.conf -H -v >> /var/log/pulledpork 2>&1")
 
+
 if __name__ == "__main__":
     main()
 

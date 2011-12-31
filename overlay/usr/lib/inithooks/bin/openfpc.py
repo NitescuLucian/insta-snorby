@@ -62,9 +62,10 @@ def main():
 	system("cd /var/www/snorby && /usr/local/bin/rails runner 'Setting.set(:packet_capture, 1)' > /dev/null 2>&1")
 	system("cd /var/www/snorby && /usr/local/bin/rails runner \"Setting.set(:packet_capture_url, 'https://%s/openfpc/cgi-bin/extract.cgi')\" > /dev/null 2>&1" % ipaddress)
 	system("cd /var/www/snorby && /usr/local/bin/rails runner \"Setting.set(:packet_capture_type, 'openfpc')\" > /dev/null 2>&1")
-        system("cd /var/www/snorby && /usr/local/bin/rails runner 'Setting.set(:packet_capture_auto_auth, 1)' > /dev/null 2>&1")
+  system("cd /var/www/snorby && /usr/local/bin/rails runner 'Setting.set(:packet_capture_auto_auth, 1)' > /dev/null 2>&1")
 	system("cd /var/www/snorby && /usr/local/bin/rails runner \"Setting.set(:packet_capture_user, '%s')\" > /dev/null 2>&1" % fpcuser[1])
 	system("cd /var/www/snorby && /usr/local/bin/rails runner \"Setting.set(:packet_capture_password, '%s')\" > /dev/null 2>&1" % fpcpassword)
+
 
 if __name__ == "__main__":
     main()

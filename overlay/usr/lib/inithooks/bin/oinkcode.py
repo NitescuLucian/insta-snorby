@@ -57,6 +57,7 @@ def main():
 	system("sed -i 's/<oinkcode>/%s/g' /root/vrtpulledpork.conf" % oinkcode[1])
 	system("cp /root/vrtpulledpork.conf /root/pulledpork-0.6.1/etc/pulledpork.conf")
 
+
 if __name__ == "__main__":
     main()
 
